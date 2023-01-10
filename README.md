@@ -1,5 +1,13 @@
-# SimpleBoard
-CRUD기반의 간단한 게시판 만들기
+# Simple Web Diary
+
+## 프로젝트 기간
+- 시작일 : 2023년 01월 10일
+- 완료일 : 2023년 02월 28일
+
+## Documents
+- [WBS](https://docs.google.com/spreadsheets/d/1IIZq2Y1O5BsacyZJRzRVm80XuF3MMPs3/edit?usp=drive_web&ouid=110841142084918331770&rtpof=true)
+- [기능명세서](https://docs.google.com/spreadsheets/d/1EKmDqCrQdLxEPcSADVpl3U5geQdLFP44vODQNZRHqsU/edit#gid=0)
+- UI/UX
 
 ## 목적
 ### 1. 배포 자동화
