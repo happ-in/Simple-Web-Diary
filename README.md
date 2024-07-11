@@ -1,8 +1,8 @@
 # Simple Web Diary
 
 ## 프로젝트 기간
-- 시작일 : 2024년 02월 25일
-- 완료일 : 2024년 06월 30일
+- 시작일 : 2024년 07월 11일
+- 완료일 : 2024년 08월 30일
 
 ## Documents
 - [WBS](https://docs.google.com/spreadsheets/d/1IIZq2Y1O5BsacyZJRzRVm80XuF3MMPs3/edit?usp=drive_web&ouid=110841142084918331770&rtpof=true)
