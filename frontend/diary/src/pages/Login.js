@@ -1,11 +1,13 @@
-// import React, { useState, useEffect } from 'react'
 import kakaoLoginIcon from '../icons/kakao_login_large_wide.png'
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
     return (
         <div> 
             <h1>Login</h1>
-            <img src={kakaoLoginIcon} alt="kakaoLoginIcon"></img>
+            <Link to="/cal">
+                <img src={kakaoLoginIcon} alt="kakaoLoginIcon" />
+            </Link>
         </div>
     )
 }
