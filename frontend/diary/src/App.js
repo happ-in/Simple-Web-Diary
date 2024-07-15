@@ -7,9 +7,9 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <div> 
+    <div className='App'> 
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/cal" element={<Calendar />} />
       </Routes>
     </div>
