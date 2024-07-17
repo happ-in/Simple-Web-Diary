@@ -1,13 +1,13 @@
-import { addMonths, differenceInCalendarDays, endOfDay, getMonth, isSaturday, isSunday, startOfDay, subMonths } from "date-fns";
+// import { addMonths, differenceInCalendarDays, endOfMonth, getMonth, isSaturday, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek } from "date-fns";
+import { addMonths, differenceInCalendarDays, endOfMonth, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek } from "date-fns";
 import  React, { useCallback, useMemo, useState }  from "react";
+import { format } from "date-fns";
 
 export const Calendar = () => {
     const days = ['일', '월', '화', '수', '목', '금', '토'];
 
     const [currMonth, setCurrMonth] = useState(new Date());
-    const monthStart = startOfDay(currMonth); // 현재 달의 시작 날짜
-    const monthEnd = endOfDay(currMonth); // 현재 달의 마지막 날짜
-
+    
     /**
      * useMemo에서 memo는 memorization
      * 프로그램이 동일한 계산 반복해야 할 때, 이전 계산한 값을 메모리에 저장.
@@ -17,11 +17,24 @@ export const Calendar = () => {
      */
     const createMonth = useMemo(() => {
         const monthArr = [];
-        let day = monthStart;
-        while (differenceInCalendarDays(monthEnd, day) >= 0) {
-            monthArr.push(day);
-            day = addDays(day, 1); // 1일씩 증가
+
+        const monthStart = startOfMonth(currMonth); // 현재 달의 시작 날짜
+        const monthEnd = endOfMonth(currMonth); // 현재 달의 마지막 날짜
+        
+        const startDate = startOfWeek(monthStart);
+        const endDate = endOfWeek(monthEnd);
+
+        let row = [];
+        let day = startDate;
+        while (differenceInCalendarDays(endDate, day) >= 0) {
+            if ((startDate !== day) && isSunday(day)) {
+                monthArr.push(row);
+                row = [];
+            }
+            row.push(day);
+            day = addDays(day, 1);
         }
+
         return monthArr;
     });
 
@@ -35,10 +48,14 @@ export const Calendar = () => {
     return (
         <div> 
             <div>
-                <div>이전버튼</div>
+                <div>
+                    <button onClick={prevMonthHandler}>이전버튼</button>
+                </div>
                 <span>년</span>
                 <span>월</span>
-                <div>이후버튼</div>
+                <div>
+                    <button onClick={nextMonthHandler}>이후버튼</button>
+                </div>
             </div>
             <table>
                 <thead>
@@ -48,26 +65,19 @@ export const Calendar = () => {
                         ))}
                     </tr>
                 </thead>
+                <tbody>
+                    {createMonth.map((week) => {
+                        return (
+                        <tr>
+                            {week.map((day) => ( 
+                                <th>{format(day, "d")}</th> 
+                            ))}
+                        </tr>
+                        )
+                    })}
+                </tbody>
             </table>
             <div>
-                {createMonth.map((val, i) => {
-                    let style;
-                    const validation = getMonth(currMonth) === getMonth(val);
-                    const today = format(new Date(), "yyyyMMdd") === format(v, "yyyyMMdd");
-
-                    if (validation && isSaturday(v)) {
-                        style = { color : "blue "};
-                    }
-                    else if (validation && isSunday(v)) {
-                        style = { color : "red" }
-                    }
-                    return (
-                        <div key={`date${i}`} style={style}>
-                            <span> {format(v, "d")} </span>
-                            <span> {today} </span>
-                        </div>
-                    );
-                })}
             </div>
         </div>
     )
