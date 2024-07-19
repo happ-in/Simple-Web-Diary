@@ -1,6 +1,5 @@
-// import { addMonths, differenceInCalendarDays, endOfMonth, getMonth, isSaturday, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek } from "date-fns";
-import { addMonths, differenceInCalendarDays, endOfMonth, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek } from "date-fns";
-import  React, { useCallback, useMemo, useState }  from "react";
+import { addMonths, differenceInCalendarDays, endOfMonth, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek, isSaturday } from "date-fns";
+import  React, { useMemo, useState }  from "react";
 import { format } from "date-fns";
 
 export const Calendar = () => {
@@ -38,9 +37,9 @@ export const Calendar = () => {
         return monthArr;
     });
 
-    const nextMonthHandler = useCallback(() => {
+    const nextMonthHandler = () => {
         setCurrMonth(addMonths(currMonth, 1));
-    });
+    };
     const prevMonthHandler = () => {
         setCurrMonth(subMonths(currMonth, 1));
     };
@@ -51,8 +50,8 @@ export const Calendar = () => {
                 <div>
                     <button onClick={prevMonthHandler}>이전버튼</button>
                 </div>
-                <span>년</span>
-                <span>월</span>
+                <span>{format(currMonth, "yyyy년")}</span>
+                <span>{format(currMonth, "M월")}</span>
                 <div>
                     <button onClick={nextMonthHandler}>이후버튼</button>
                 </div>
@@ -60,18 +59,36 @@ export const Calendar = () => {
             <table>
                 <thead>
                     <tr>
-                        {days.map((day, i) => (
-                            <th key={i}>{ day }</th>
-                        ))}
+                        {days.map((day, i) => {
+                            let style;
+                            if (i === 0) {
+                                style = { color : "red"};
+                            } else if (i === 6) {
+                                style = { color : "blue"};
+                            }
+
+                            return (
+                                <th key={i} style={style}>{ day }</th>
+                            )
+                        })}
                     </tr>
                 </thead>
                 <tbody>
                     {createMonth.map((week) => {
                         return (
                         <tr>
-                            {week.map((day) => ( 
-                                <th>{format(day, "d")}</th> 
-                            ))}
+                            {week.map((day) => {
+                                let style;
+                                if (isSunday(day)) {
+                                    style = { color : "red"};
+                                } else if (isSaturday(day)) {
+                                    style = { color : "blue"};
+                                }   
+
+                                return (
+                                    <th style={style}>{format(day, "d")}</th>
+                                )
+                            })}
                         </tr>
                         )
                     })}
