@@ -1,6 +1,7 @@
 import { addMonths, differenceInCalendarDays, endOfMonth, isSunday, startOfMonth, subMonths, addDays, startOfWeek, endOfWeek, isSaturday } from "date-fns";
 import  React, { useMemo, useState }  from "react";
 import { format } from "date-fns";
+import '../css/Calendar.css';
 
 export const Calendar = () => {
     const days = ['일', '월', '화', '수', '목', '금', '토'];
@@ -47,54 +48,52 @@ export const Calendar = () => {
     return (
         <div> 
             <div>
-                <div>
-                    <button onClick={prevMonthHandler}>이전버튼</button>
-                </div>
-                <span>{format(currMonth, "yyyy년")}</span>
-                <span>{format(currMonth, "M월")}</span>
-                <div>
-                    <button onClick={nextMonthHandler}>이후버튼</button>
+                <div className="cal-header"> 
+                    <button className="arrow-prev" onClick={prevMonthHandler}/>
+                    <span>{format(currMonth, "yyyy년 ")}</span>
+                    <span>{format(currMonth, "M월")}</span>
+                    <button className="arrow-next" onClick={nextMonthHandler}/>
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        {days.map((day, i) => {
-                            let style;
-                            if (i === 0) {
-                                style = { color : "red"};
-                            } else if (i === 6) {
-                                style = { color : "blue"};
-                            }
-
-                            return (
-                                <th key={i} style={style}>{ day }</th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {createMonth.map((week) => {
-                        return (
+            <div className="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            {week.map((day) => {
+                            {days.map((day, i) => {
                                 let style;
-                                if (isSunday(day)) {
+                                if (i === 0) {
                                     style = { color : "red"};
-                                } else if (isSaturday(day)) {
+                                } else if (i === 6) {
                                     style = { color : "blue"};
-                                }   
+                                }
 
                                 return (
-                                    <th style={style}>{format(day, "d")}</th>
+                                    <th key={i} style={style}>{ day }</th>
                                 )
                             })}
                         </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-            <div>
+                    </thead>
+                    <tbody>
+                        {createMonth.map((week) => {
+                            return (
+                            <tr>
+                                {week.map((day) => {
+                                    let style;
+                                    if (isSunday(day)) {
+                                        style = { color : "red"};
+                                    } else if (isSaturday(day)) {
+                                        style = { color : "blue"};
+                                    }   
+
+                                    return (
+                                        <th style={style}>{format(day, "d")}</th>
+                                    )
+                                })}
+                            </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         </div>
     )

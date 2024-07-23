@@ -1,0 +1,48 @@
+.arrow-prev,
+.arrow-next {
+    margin-left : 10px;
+    margin-right : 10px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    border-right: 0; 
+    border-top : 0;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+.arrow-prev {
+    transform: rotate(45deg);
+}
+
+.arrow-next {
+    transform: rotate(-135deg);
+}
+
+.cal-header {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+    font-size: x-large;
+    vertical-align: middle;
+    margin-bottom: 20px;
+}
+
+/* 캘린더 */
+table {
+    width: 95%;
+    height: 400px;
+    border: 1px solid #d4d4d4;
+    border-collapse: collapse;
+}
+tbody {
+    vertical-align: text-top;
+}
+th, td {
+    border: 1px solid #d4d4d4;
+}
+.table-container {
+    text-align: -webkit-center;
+}
