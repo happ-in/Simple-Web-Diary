@@ -35,6 +35,10 @@ export const Calendar = () => {
             day = addDays(day, 1);
         }
 
+        if (row.length > 0) {
+            monthArr.push(row);
+        }
+
         return monthArr;
     });
 
