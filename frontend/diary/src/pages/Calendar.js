@@ -2,6 +2,7 @@ import { addMonths, differenceInCalendarDays, endOfMonth, isSunday, startOfMonth
 import  React, { useMemo, useState }  from "react";
 import { format } from "date-fns";
 import '../css/Calendar.css';
+import { useNavigate } from "react-router-dom";
 
 export const Calendar = () => {
     const days = ['일', '월', '화', '수', '목', '금', '토'];
@@ -49,18 +50,31 @@ export const Calendar = () => {
         setCurrMonth(subMonths(currMonth, 1));
     };
 
+    /** 스케줄러 등록하는 화면으로 이동 */
+    const navigate = useNavigate();
+    const goToSchedule = (day) => {
+        navigate("/schedule", 
+            {state: { "year" : format(currMonth, "yyyy")
+                    , "month" : format(currMonth, "MM")
+                    , "day" : format(day, "dd")}})
+    }
+
     return (
         <div> 
+            {/* 상단헤더 */}
             <div>
                 <div className="cal-header"> 
                     <button className="arrow-prev" onClick={prevMonthHandler}/>
                     <span>{format(currMonth, "yyyy년 ")}</span>
-                    <span>{format(currMonth, "M월")}</span>
+                    <span>{format(currMonth, "MM월")}</span>
                     <button className="arrow-next" onClick={nextMonthHandler}/>
                 </div>
             </div>
+
+            {/* 캘린더 */}
             <div className="table-container">
                 <table>
+                    {/* 일월화수목금토 */}
                     <thead>
                         <tr>
                             {days.map((day, i) => {
@@ -77,6 +91,8 @@ export const Calendar = () => {
                             })}
                         </tr>
                     </thead>
+
+                    {/* 일자 */}
                     <tbody>
                         {createMonth.map((week) => {
                             return (
@@ -90,7 +106,7 @@ export const Calendar = () => {
                                     }   
 
                                     return (
-                                        <th style={style}>{format(day, "d")}</th>
+                                        <th style={style} onClick={() => goToSchedule(day)}>{format(day, "d")}</th>
                                     )
                                 })}
                             </tr>
