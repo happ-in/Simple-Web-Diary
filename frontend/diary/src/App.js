@@ -4,6 +4,7 @@ import  React from 'react';
 
 import Calendar from "./pages/Calendar";
 import Login from "./pages/Login";
+import Schedule from "./pages/Schedule";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/cal" element={<Calendar />} />
-      </Routes>
+        <Route path="/schedule" element={<Schedule />} />
+    </Routes>
     </div>
   );
 }
