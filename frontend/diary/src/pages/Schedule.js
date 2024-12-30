@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "../css/Schedule.css";
 import { useState } from "react";
 
+import TodoList from "./TodoList";
 
 export const Schedule = () => {
     const location = useLocation();
@@ -9,6 +10,7 @@ export const Schedule = () => {
     
     let [memoSize, setMemoSize] = useState(0);
     const [memo, setMemo] = useState("");
+    // const [todos, setTodos] = useState([]);
 
     const memoSizeHandler = (e) => {
         if (e.target.value.length > 100) {
@@ -31,6 +33,9 @@ export const Schedule = () => {
                             <span className="title">ToDo List</span>
                             <span className="add-btn">+ 추가</span>
                         </div>
+                        <TodoList>
+                            
+                        </TodoList>
                     </div>
                 </div>
 
