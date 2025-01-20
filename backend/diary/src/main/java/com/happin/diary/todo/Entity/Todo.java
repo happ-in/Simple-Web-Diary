@@ -1,17 +1,24 @@
 package com.happin.diary.todo.Entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Todo {
 
-    private LocalDateTime date;
-    private long sn;
+    @EmbeddedId
+    private TodoId todoId;
+
+    private long priorityNum;
     private String todo;
+    private char complete;
 }
